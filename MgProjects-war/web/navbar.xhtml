@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>M</b>P</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Manage</b>Projects</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+
+                       
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <h:graphicImage alt="User Image" url="#{loginBean.urlImage}" class="user-image" />
+                                <h:outputLabel><h:outputText class="hidden-xs" value="#{loginBean.nickName}"/></h:outputLabel>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header" style="cursor: pointer;">
+
+                                    <h:graphicImage alt="User Image" url="#{loginBean.urlImage}" class="img-circle" width="160" height="160"/>
+                                    <p>
+                                        <h:outputText class="hidden-xs" value="#{loginBean.nickName}"/>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <h:form>
+                                        <div class="pull-left">
+                                            <h:commandButton action="profile.xhtml" value="Perfil" class="btn btn-default btn-flat"/>
+                                        </div>
+                                    </h:form>
+                                    <div class="pull-right">
+                                        <h:form>
+                                        <h:commandLink id="logout" action="#{loginBean.doLogout()}" onclick="signOut()" class="btn btn-default btn-flat"><h:outputText value="Sign out"/></h:commandLink>
+                                        <div hidden="true" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                                        </h:form>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+       
+</html>
+

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    
+        <aside class="main-sidebar">
+
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel" >
+                    <div class="pull-left image" style="cursor: pointer;">
+                        <h:graphicImage alt="User Image" url="#{loginBean.urlImage}" class="img-circle"/>
+                    </div>
+                    <div class="pull-left info" style="cursor: pointer;">
+                        <h:form>
+                            <h:commandLink action="profile.xhtml">
+                                <h:outputLabel><h:outputText class="hidden-xs" style="cursor: pointer;" value="#{loginBean.nickName}"/></h:outputLabel>
+                            </h:commandLink>
+                        </h:form>
+                        <!-- Status -->
+                    </div>
+                </div>
+
+
+                <h:form>
+                    <!-- Sidebar Menu -->
+                    <ul class="sidebar-menu">
+                        <li>
+                            <h:commandLink id="addProject" action="addProject.xhtml">
+                                <span class="fa fa-plus"></span>
+                                <h:outputText value="  Nuevo Proyecto"/>
+                            </h:commandLink>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-open"></i> <span>Mis Proyectos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                              <ui:repeat value="#{loginBean.project_list}" var="project">
+                            <li>
+                                <h:commandLink id="addProject" action="#{loginBean.doRedirectToProject(project)}">
+                                    <span class="fa fa-folder"></span>
+                                    #{project.name}
+                                </h:commandLink>
+                            </li>
+
+                        </ui:repeat>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#"><i class="fa fa-folder-open"></i> <span>Proyectos de Colaboración</span> <i class="fa fa-angle-left pull-right"></i></a>
+                            <ul class="treeview-menu">
+                                <div>
+                            <h:outputText rendered="#{projectListBean.error}" value="Vacio"/>
+                        </div>
+                        <ui:repeat value="#{loginBean.list_colaborators}" var="project">
+                            <li>
+                                <h:commandLink id="addProject" action="#{loginBean.doRedirectToProject(project)}">
+                                    <span class="fa fa-folder"></span>
+                                    #{project.name}
+                                </h:commandLink>
+                            </li>
+
+                        </ui:repeat>
+                            </ul>
+                        
+                        </li>
+                         
+                    </ul><!-- /.sidebar-menu -->
+                </h:form>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        
+
+    
+
+</html>
+
