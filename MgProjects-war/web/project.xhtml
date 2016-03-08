@@ -171,7 +171,7 @@
                                                     <!-- todo text -->
                                                     <h:outputLabel><h:outputText value="#{task.name}"></h:outputText></h:outputLabel>
                                                     <!-- Emphasis label -->
-                                                    <h:outputLabel rendered="#{task.priority eq 'urgente'}" class="label label-danger"><i class="fa fa-clock-o" ></i> <h:outputText value=" #{task.time} "/><h:outputText value="#{task.timetype}"/></h:outputLabel>
+                                                    <h:outputLabel rendered="#{task.priority eq 'acuciante'}" class="label label-danger"><i class="fa fa-clock-o" ></i> <h:outputText value=" #{task.time} "/><h:outputText value="#{task.timetype}"/></h:outputLabel>
                                                     <h:outputLabel rendered="#{task.priority eq 'repentino'}" class="label label-warning"><i class="fa fa-clock-o" ></i> <h:outputText value=" #{task.time} "/><h:outputText value="#{task.timetype}"/></h:outputLabel>
                                                     <h:outputLabel rendered="#{task.priority eq 'plani'}" class="label label-success"><i class="fa fa-clock-o" ></i> <h:outputText value=" #{task.time} "/><h:outputText value="#{task.timetype}"/></h:outputLabel>
                                                     <h:outputLabel rendered="#{task.priority eq 'accesorio'}" class="label label-info"><i class="fa fa-clock-o" ></i> <h:outputText value=" #{task.time} "/><h:outputText value="#{task.timetype}"/></h:outputLabel>
@@ -184,7 +184,7 @@
                                                     </div>
                                                     <div class="collapse box-header" id="#{task.idTask}" style="display:none">        
                                                         <h:form>
-                                                            <div class="form-group" style="width: 49.6%; display: inline-block">
+                                                            <div class="form-group" style="width: 49%; display: inline-block">
                                                                 <h:inputText class="form-control" value="#{task.time}" />
                                                             </div>
                                                             <div class="form-group" style="width: 50%; display: inline-block">
@@ -197,7 +197,7 @@
                                                                     <f:selectItem itemLabel="Semanas" itemValue="weeks" />
                                                                 </h:selectOneMenu>
                                                             </div>
-                                                            <div class="form-group" style="width: 49.6%; display: inline-block">
+                                                            <div class="form-group" style="width: 49%; display: inline-block">
                                                                 <h:selectOneMenu id="priorityTask" class="form-control" value="#{task.priority}" required="true">
                                                                     <f:selectItem itemLabel="Prioridad" itemValue="default" />
                                                                     <f:selectItem itemLabel="Acuciante" itemValue="acuciante" />
@@ -237,7 +237,7 @@
 
                                                 <h:inputText class="form-control" value="#{managedTaskBean.name}" />
                                             </div>
-                                            <div class="form-group" style="width: 49.6%; display: inline-block">
+                                            <div class="form-group" style="width: 49%; display: inline-block">
                                                 <h:inputText class="form-control" a:placeholder="Tiempo" value="#{managedTaskBean.time}"/>
                                             </div>
                                             <div class="form-group" style="width: 50%; display: inline-block">
@@ -249,7 +249,7 @@
                                                     <f:selectItem itemLabel="Semanas" itemValue="weeks" />
                                                 </h:selectOneMenu>
                                             </div>
-                                            <div class="form-group" style="width: 49.6%; display: inline-block">
+                                            <div class="form-group" style="width: 49%; display: inline-block">
                                                 <h:selectOneMenu id="priorityTask" class="form-control" value="#{managedTaskBean.priority}" required="true">
                                                     <f:selectItem itemLabel="Prioridad" itemValue="default" />
                                                     <f:selectItem itemLabel="Acuciante" itemValue="acuciante" />
