@@ -59,7 +59,7 @@ public class Project implements Serializable {
     @JoinTable(name = "TEAM", joinColumns = {
         @JoinColumn(name = "ID_PROJECT", referencedColumnName = "ID_PROJECT")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_USER", referencedColumnName = "ID_USER")})
-    @ManyToMany
+    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Collection<Users> usersCollection;
     @JoinColumn(name = "ID_ADMIN", referencedColumnName = "ID_USER")
     @ManyToOne

@@ -12,9 +12,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import mgproject.ejb.ChatFacade;
 import mgproject.ejb.ProjectFacade;
 import mgproject.ejb.TaskFacade;
 import mgproject.ejb.UsersFacade;
+import mgproject.entities.Chat;
 import mgproject.entities.Project;
 import mgproject.entities.Task;
 import mgproject.entities.Users;
@@ -27,11 +29,13 @@ import mgproject.entities.Users;
 @RequestScoped
 public class ManagedProjectBean {   
     @EJB
+    private ChatFacade chatFacade;
+    @EJB
     private ProjectFacade projectFacade;
     @EJB
     private TaskFacade taskFacade;
     @EJB
-    private UsersFacade usersFacade;
+    private UsersFacade usersFacade;    
     
     @ManagedProperty(value="#{loginBean}")
     private LoginBean loginBean;
@@ -43,11 +47,20 @@ public class ManagedProjectBean {
     private int taskPln;
     private int taskAcc;
     private boolean error;
+    private boolean admin;
     
     /**
      * Creates a new instance of ManagedProjectBean
      */
     public ManagedProjectBean() {
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public Collection<Users> getList_colaborators() {
@@ -115,7 +128,12 @@ public class ManagedProjectBean {
     }   
 
     @PostConstruct
-    public void init() {        
+    public void init() {  
+        
+        admin=false;
+        if(loginBean.getIdUser().equals(loginBean.getProject().getIdAdmin().getIdUser())){
+            admin = true;
+        }
         
        Users user = usersFacade.find(loginBean.getIdUser());
        list_colaborators =  loginBean.getProject().getUsersCollection();
@@ -143,8 +161,11 @@ public class ManagedProjectBean {
     
     public String doDeleteProject(Project project){
         Collection<Task> tasks = project.getTaskCollection();
-        Collection<Users> users = project.getUsersCollection();
-        System.out.println(project.getName());
+        Collection<Chat> chats = project.getChatCollection();
+        
+        for (Chat chat : chats) {
+            chatFacade.remove(chat);
+        }
         
         for (Task task : tasks) {
             taskFacade.remove(task);

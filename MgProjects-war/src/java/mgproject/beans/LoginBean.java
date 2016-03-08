@@ -185,9 +185,9 @@ public class LoginBean implements Serializable {
             user.setUrlImage(this.urlImage);
             usersFacade.edit(user);
         }
-        this.singIn = true;
-        this.project_list = projectFacade.findByUser(user);
-        this.users_list = usersFacade.findAll();
+        singIn = true;
+        project_list = projectFacade.findByUser(user);
+        users_list = usersFacade.findAll();
         
         return "index";
     }

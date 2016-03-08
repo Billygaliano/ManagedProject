@@ -41,7 +41,6 @@ public class ManagedTaskBean {
     private List<Task> task_list;
     private String userid;
     private boolean taskNoAdded;
-    private boolean admin;
 
     public UsersFacade getUsersFacade() {
         return usersFacade;
@@ -57,14 +56,6 @@ public class ManagedTaskBean {
 
     public void setTaskFacade(TaskFacade taskFacade) {
         this.taskFacade = taskFacade;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
     }
 
     public boolean isTaskNoAdded() {
@@ -151,10 +142,6 @@ public class ManagedTaskBean {
         Users user = usersFacade.find(this.loginBean.getIdUser());
         this.task_list = list_task;
         this.taskNoAdded = false;
-        this.admin=false;
-        if(loginBean.getIdUser().equals(loginBean.getProject().getIdAdmin().getIdUser())){
-            this.admin = true;
-        }
     }
 
     public String doAddTask() {

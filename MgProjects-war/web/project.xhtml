@@ -208,11 +208,11 @@
                                                             </div>
                                                             <div class="form-group" style="width: 50%; display: inline-block">
 
-                                                                <h:selectOneMenu id="taskTo" class="form-control" value="#{managedTaskBean.userid}" rendered="#{managedTaskBean.admin}">
+                                                                <h:selectOneMenu id="taskTo" class="form-control" value="#{managedTaskBean.userid}" rendered="#{managedProjectBean.admin}">
                                                                     <f:selectItems itemValue="#{task.usersCollection[0].idUser}" itemLabel="#{task.usersCollection[0].nick}"/>
                                                                     <f:selectItems value="#{managedTaskBean.loginBean.project.usersCollection}" var="user" itemValue="#{user.idUser}" itemLabel="#{user.nick}"/>
                                                                 </h:selectOneMenu>
-                                                                <h:selectOneMenu id="taskToME" class="form-control" value="#{managedTaskBean.userid}" rendered="#{!managedTaskBean.admin}">
+                                                                <h:selectOneMenu id="taskToME" class="form-control" value="#{managedTaskBean.userid}" rendered="#{!managedProjectBean.admin}">
                                                                     <f:selectItem itemLabel="#{managedTaskBean.loginBean.nickName}" itemValue="#{managedTaskBean.loginBean.idUser}"/>
                                                                 </h:selectOneMenu>
 
@@ -259,11 +259,11 @@
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="form-group" style="width: 50%; display: inline-block">
-                                                <h:selectOneMenu id="taskTo" class="form-control" value="#{managedTaskBean.userid}" rendered="#{managedTaskBean.admin}">
+                                                <h:selectOneMenu id="taskTo" class="form-control" value="#{managedTaskBean.userid}" rendered="#{managedProjectBean.admin}">
                                                     <f:selectItem itemValue="#{managedTaskBean.loginBean.idUser}" itemLabel="#{managedTaskBean.loginBean.nickName}"/>
                                                     <f:selectItems value="#{managedTaskBean.loginBean.project.usersCollection}" var="user" itemValue="#{user.idUser}" itemLabel="#{user.nick}"/>
                                                 </h:selectOneMenu>
-                                                <h:selectOneMenu id="taskToME" class="form-control" value="#{managedTaskBean.userid}" rendered="#{!managedTaskBean.admin}">
+                                                <h:selectOneMenu id="taskToME" class="form-control" value="#{managedTaskBean.userid}" rendered="#{!managedProjectBean.admin}">
                                                     <f:selectItem itemLabel="#{managedTaskBean.loginBean.nickName}" itemValue="#{managedTaskBean.loginBean.idUser}"/>
                                                 </h:selectOneMenu>
                                             </div>
@@ -351,6 +351,11 @@
                                     <input type="hidden" class="form-control" name="id_project" id="id_project" value="#{managedProjectBean.loginBean.project.idProject}" />
                                     <h:form>
                                         <div class="contacts-list">
+                                            <h:outputLabel>Administrador:</h:outputLabel>
+                                            <div class="contacts-list">
+                                                <h:outputText value=" #{managedProjectBean.loginBean.project.idAdmin.nick}" class="fa fa-github"/>
+                                            </div>
+                                            <br />
                                             <label>Colaboradores:</label>
                                             <ui:repeat value="#{managedProjectBean.loginBean.project.usersCollection}" var="user">
                                                 <div class="contacts-list">
@@ -358,15 +363,15 @@
                                                 </div>
                                             </ui:repeat>
                                             <br/>
-                                            <label>Invitar a:</label>
+                                            <h:outputLabel rendered="#{managedProjectBean.admin}">Invitar a:</h:outputLabel>
                                             <div>
-                                                <h:selectOneMenu id="colaborador" value="#{addProjectBean.idColaborador}" class="form-control">
+                                                <h:selectOneMenu rendered="#{managedProjectBean.admin}" value="#{addProjectBean.idColaborador}" class="form-control">
                                                     <f:selectItems value="#{addProjectBean.loginBean.users_list}" var="colaborador" itemValue="#{colaborador.idUser}" itemLabel="#{colaborador.nick}"></f:selectItems>
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
                                         <br/>
-                                        <h:commandButton value="Invitar usuario" action="#{addProjectBean.doInvitar()}" class="btn btn-primary btn-md"/>
+                                        <h:commandButton rendered="#{managedProjectBean.admin}" value="Invitar usuario" action="#{addProjectBean.doInvitar()}" class="btn btn-primary btn-md"/>
                                         <br/>   
                                     </h:form>       
                                 </div>
@@ -379,7 +384,7 @@
                         
                         <!-- Remove project button -->
                         <h:form>
-                            <h:commandButton class="btn btn-block btn-danger btn-flat" action="#{managedProjectBean.doDeleteProject(managedProjectBean.loginBean.project)}" value="Borrar proyecto"></h:commandButton>
+                            <h:commandButton rendered="#{managedProjectBean.admin}" class="btn btn-block btn-danger btn-flat" action="#{managedProjectBean.doDeleteProject(managedProjectBean.loginBean.project)}" value="Borrar proyecto"></h:commandButton>
                         </h:form><!-- /.box -->
 
                     </div><!-- /.row (main row) -->
