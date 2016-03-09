@@ -14,6 +14,9 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta name="google-signin-scope" content="profile email"/>
         <meta name="google-signin-client_id" content="272492369648-bdp9fp20q7v95edu02aif0eg7v069e42.apps.googleusercontent.com"/>
+        <f:metadata>
+            <f:event listener="#{loginBean.init()}" type="preRenderView" />
+        </f:metadata>
         <script src="https://apis.google.com/js/platform.js" defer="true"></script>
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="themes/bootstrap/css/bootstrap.min.css"/>
@@ -218,7 +221,7 @@
                                                             </h:selectOneMenu>
                                                         </div>
                                                         <div class="form-group" style="width: 50%; display: inline-block">
-                                                            
+
                                                             <h:selectOneMenu id="taskTo" class="form-control" value="#{managedTaskBean.editUser}" rendered="#{managedProjectBean.admin}">
                                                                 <f:selectItem itemValue="#{task.usersCollection[0].idUser}" itemLabel="#{task.usersCollection[0].nick}"/> 
                                                                 <f:selectItem itemValue="#{managedTaskBean.loginBean.idUser}" itemLabel="#{managedTaskBean.loginBean.nickName}"/>
@@ -391,7 +394,7 @@
 
                         <!-- Remove project button -->
                         <h:form>
-                            <h:commandButton rendered="#{managedProjectBean.admin}" class="btn btn-block btn-danger btn-flat" action="#{managedProjectBean.doDeleteProject(managedProjectBean.loginBean.project)}" value="Borrar proyecto"></h:commandButton>
+                            <h:commandButton onclick="return confirm('¿Seguro que quieres borrar la tarea?');" rendered="#{managedProjectBean.admin}" class="btn btn-block btn-danger btn-flat" action="#{managedProjectBean.doDeleteProject(managedProjectBean.loginBean.project)}" value="Borrar proyecto"></h:commandButton>
                         </h:form><!-- /.box -->
 
                     </div><!-- /.row (main row) -->
@@ -417,7 +420,7 @@
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-                                                    $.widget.bridge('uibutton', $.ui.button);
+                                $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="themes/bootstrap/js/bootstrap.min.js"></script>
@@ -449,13 +452,13 @@
         <!-- AdminLTE for demo purposes -->
         <script src="themes/dist/js/demo.js"></script>
         <script type="text/javascript">
-                                                    function showAddItem() {
-                                                        if (document.getElementById('addNewItem').style.display === 'block') {
-                                                            document.getElementById('addNewItem').style.display = 'none';
-                                                        } else {
-                                                            document.getElementById('addNewItem').style.display = 'block';
-                                                        }
-                                                    }
+                                function showAddItem() {
+                                    if (document.getElementById('addNewItem').style.display === 'block') {
+                                        document.getElementById('addNewItem').style.display = 'none';
+                                    } else {
+                                        document.getElementById('addNewItem').style.display = 'block';
+                                    }
+                                }
         </script>
         <script type="text/javascript">
             function showEditItem(idTask) {
