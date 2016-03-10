@@ -5,14 +5,13 @@
  */
 package mgproject.beans;
 
-
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.Part;
 import mgproject.ejb.AttachmentFacade;
 import mgproject.entities.Attachment;
@@ -21,9 +20,10 @@ import mgproject.entities.Attachment;
  *
  * @author inftel23
  */
-@ManagedBean
+@Named(value = "fileUploadBean")
 @ViewScoped
-public class FilesLoadBean{
+public class FileUploadBean implements Serializable{
+
     @EJB
     private AttachmentFacade attachmentFacade;
     @ManagedProperty(value = "#{loginBean}")
@@ -51,12 +51,9 @@ public class FilesLoadBean{
     public void init(){
         this.attachment_list = attachmentFacade.findByIdProject(this.loginBean.getProject().getIdProject());
     }
-    
-    public FilesLoadBean() {
-    }
+  
     public String doUpLoadFile(){
         
         return "project";
     }
-    
 }
