@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -20,7 +21,7 @@ import mgproject.entities.Attachment;
  *
  * @author inftel23
  */
-@Named(value = "fileUploadBean")
+@ManagedBean
 @ViewScoped
 public class FileUploadBean implements Serializable{
 
