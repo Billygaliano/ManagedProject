@@ -324,7 +324,21 @@
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="col-lg-5 connectedSortable">
-
+                            <div class="box box-success">
+                                <div class="box-header">
+                                    <i class="fa fa-envelope"></i>
+                                    <h3 class="box-title">Ficheros Compartidos</h3>
+                                    <ui:repeat value="#{filesLoadBean.attachment_list}" var="files">
+                                        <li>
+                                            #{files.nombre}
+                                        </li>
+                                    </ui:repeat>
+                                    <h:form enctype="multipart/form-data">
+                                        <h:inputFile value="#{filesLoadBean.file}"></h:inputFile>
+                                        <h:commandButton class="btn btn-primary btn-xs pull-right" action="#{filesLoadBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
+                                    </h:form>
+                                </div>
+                            </div>
 
                             <!-- Chat box -->
                             <div class="box box-success">

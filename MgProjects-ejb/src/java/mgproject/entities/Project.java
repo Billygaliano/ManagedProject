@@ -40,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name"),
     @NamedQuery(name = "Project.findByDescription", query = "SELECT p FROM Project p WHERE p.description = :description")})
 public class Project implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProject")
+    private Collection<Attachment> attachmentCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(generator="PROJECT_SEQUENCE") 
@@ -163,6 +165,15 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "mgproject.entities.Project[ idProject=" + idProject + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Attachment> getAttachmentCollection() {
+        return attachmentCollection;
+    }
+
+    public void setAttachmentCollection(Collection<Attachment> attachmentCollection) {
+        this.attachmentCollection = attachmentCollection;
     }
     
 }

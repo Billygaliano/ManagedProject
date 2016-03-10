@@ -30,23 +30,23 @@ public class ProjectFacade extends AbstractFacade<Project> {
     public ProjectFacade() {
         super(Project.class);
     }
-    public List<Project> findByNameAndUser(String name, Users u){
-        
+     public List<Project> findByNameAndUser(String name, Users u){
+       
         Query query = em.createQuery("SELECT p FROM Project p WHERE p.name = :name AND p.idAdmin = :u")
                 .setParameter("name", name)
                 .setParameter("u",u);
         List<Project> list = query.getResultList();
         return list;
     }
-    
+   
     public List<Project> findByUser(Users u){
-        
+       
         Query query = em.createQuery("SELECT p FROM Project p WHERE p.idAdmin = :u")
                 .setParameter("u", u);
         List<Project> list = query.getResultList();
         return list;
     }
-    
+   
     public List<Project> findColaborations(Users u){
         Query query = em.createQuery("SELECT p FROM Project p WHERE :u MEMBER OF p.usersCollection")
                 .setParameter("u", u);
