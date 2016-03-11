@@ -328,14 +328,17 @@
                                 <div class="box-header">
                                     <i class="fa fa-envelope"></i>
                                     <h3 class="box-title">Ficheros Compartidos</h3>
-                                    <ui:repeat value="#{filesLoadBean.attachment_list}" var="files">
+                                    <ui:repeat value="#{fileUploadBean.attach_list}" var="files">
+                                        <h:form>
                                         <li>
-                                            #{files.nombre}
+                                            <h:commandLink action="#{fileUploadBean.diRedirect(files.blob)}" ><h:outputText value="#{files.nombre}"></h:outputText></h:commandLink>
+
                                         </li>
+                                    </h:form>
                                     </ui:repeat>
                                     <h:form enctype="multipart/form-data">
-                                        <h:inputFile value="#{filesLoadBean.file}"></h:inputFile>
-                                        <h:commandButton class="btn btn-primary btn-xs pull-right" action="#{filesLoadBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
+                                        <h:inputFile value="#{fileUploadBean.file}"></h:inputFile>
+                                        <h:commandButton class="btn btn-primary btn-xs pull-right" action="#{fileUploadBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
                                     </h:form>
                                 </div>
                             </div>

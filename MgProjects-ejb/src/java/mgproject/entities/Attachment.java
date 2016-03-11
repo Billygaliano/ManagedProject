@@ -43,7 +43,7 @@ public class Attachment implements Serializable {
     @NotNull
     @Column(name = "ID_ATTACHMENT")
     private Long idAttachment;
-    @Size(max = 20)
+    @Size(max = 300)
     @Column(name = "BLOB")
     private String blob;
     @Size(max = 300)
