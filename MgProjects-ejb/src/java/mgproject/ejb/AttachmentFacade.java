@@ -9,15 +9,15 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import mgproject.entities.Chat;
+import mgproject.entities.Attachment;
 
 /**
  *
  * @author inftel23
  */
 @Stateless
-public class ChatFacade extends AbstractFacade<Chat> {
+public class AttachmentFacade extends AbstractFacade<Attachment> {
+
     @PersistenceContext(unitName = "MgProjects-ejbPU")
     private EntityManager em;
 
@@ -26,13 +26,13 @@ public class ChatFacade extends AbstractFacade<Chat> {
         return em;
     }
 
-    public ChatFacade() {
-        super(Chat.class);
+    public AttachmentFacade() {
+        super(Attachment.class);
     }
-    public List<Chat> findByIdProject(Long idProject){
-        Query query = em.createQuery("SELECT c FROM Chat c WHERE c.idProject.idProject = :idProject")
-                .setParameter("idProject", idProject);
-        List<Chat> list = query.getResultList();
-        return list;
+
+    public List<Attachment> findByIdProject(Long idProject) {
+        List<Attachment> attach_list;
+        attach_list = em.createNamedQuery("Attachment.findByIdProject").setParameter("idProject", idProject).getResultList();
+        return attach_list;
     }
 }

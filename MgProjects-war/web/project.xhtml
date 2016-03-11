@@ -282,6 +282,7 @@
                                             </div>
                                             <div class="box-footer clearfix">
                                                 <h:commandButton class="btn btn-default pull-right" action="#{managedTaskBean.doAddTask()}" value="Crear"></h:commandButton>
+                                                
                                             </div>
                                         </h:form>
                                     </div>
@@ -324,7 +325,27 @@
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="col-lg-5 connectedSortable">
+                            <div class="box box-success">
+                                <div class="box-header">
+                                    <i class="fa fa-files-o"></i>
+                                    <h3 class="box-title">Ficheros Compartidos</h3>
+                                    </div>
+                                <div class="box-body">
+                                    <ui:repeat value="#{fileUploadBean.attach_list}" var="files">
+                                        <h:form>
+                                            <li style="list-style:none">
+                                            <h:commandLink action="#{fileUploadBean.diRedirect(files.blob)}" class="fa fa-file"> <h:outputText value=" #{files.nombre}"></h:outputText></h:commandLink>
 
+                                        </li>
+                                    </h:form>
+                                    </ui:repeat>
+                                    <br/>
+                                    <h:form enctype="multipart/form-data">
+                                        <h:inputFile value="#{fileUploadBean.file}"></h:inputFile>
+                                        <h:commandButton class="btn btn-default pull-right" action="#{fileUploadBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
+                                    </h:form>
+                                </div>
+                            </div>
 
                             <!-- Chat box -->
                             <div class="box box-success">
