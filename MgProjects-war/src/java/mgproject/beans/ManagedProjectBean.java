@@ -137,6 +137,7 @@ public class ManagedProjectBean {
         
        Users user = usersFacade.find(loginBean.getIdUser());
        list_colaborators =  loginBean.getProject().getUsersCollection();
+       
        if(list_colaborators.isEmpty()){
            error=true;
        }

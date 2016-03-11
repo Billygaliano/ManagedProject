@@ -364,11 +364,14 @@
                                             </div>
                                             <br />
                                             <label>Colaboradores:</label>
-                                            <ui:repeat value="#{managedProjectBean.loginBean.project.usersCollection}" var="user">
+                                            <ui:repeat value="#{managedProjectBean.list_colaborators}" var="user">
                                                 <div class="contacts-list">
                                                     <h:outputText value=" #{user.nick}" class="fa fa-github"/>
                                                 </div>
                                             </ui:repeat>
+                                            <div class="contacts-list">
+                                                    <h:outputText rendered="#{managedProjectBean.admin != true}" value=" #{managedProjectBean.loginBean.nickName}" class="fa fa-github"/>
+                                            </div>
                                             <br/>
                                             <h:outputLabel rendered="#{managedProjectBean.admin}">Invitar a:</h:outputLabel>
                                             <div>
