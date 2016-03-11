@@ -12,6 +12,9 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta name="google-signin-scope" content="profile email"/>
         <meta name="google-signin-client_id" content="272492369648-bdp9fp20q7v95edu02aif0eg7v069e42.apps.googleusercontent.com"/>
+        <f:metadata>
+            <f:event listener="#{loginBean.init()}" type="preRenderView" />
+        </f:metadata>
         <script src="https://apis.google.com/js/platform.js" defer="true"></script>
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="themes/bootstrap/css/bootstrap.min.css"/>
@@ -56,19 +59,19 @@
     <h:body class="hold-transition skin-blue sidebar-mini">
 
         <div class="wrapper">
-            
-        
-        
+
+
+
             <ui:insert name="header">
                 <ui:include src="navbar.xhtml"/>
             </ui:insert>
-        
 
-        
+
+
             <ui:insert name="menu-lateral">
                 <ui:include src="sidebar.xhtml"/>
             </ui:insert>
-        
+
 
             <div class="content-wrapper">
 
@@ -80,7 +83,7 @@
                     </h1>
                 </section>
 
-                 <section class="content">
+                <section class="content">
 
 
 
@@ -143,13 +146,13 @@
                             </div>
                         </div>
                     </ui:repeat>
-                      
+
                 </section>
 
-           </div>
-        
+            </div>
+
         </div>
-        
+
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
@@ -159,14 +162,14 @@
             <!-- Default to the left -->
             <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
         </footer>
-        
-  <!-- REQUIRED JS SCRIPTS -->
 
-    <!-- jQuery 2.1.4 -->
-    <script src="themes/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="themes/bootstrap/js/bootstrap.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="themes/dist/js/app.min.js"></script>
+        <!-- REQUIRED JS SCRIPTS -->
+
+        <!-- jQuery 2.1.4 -->
+        <script src="themes/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="themes/bootstrap/js/bootstrap.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="themes/dist/js/app.min.js"></script>
     </h:body>
 </html>
