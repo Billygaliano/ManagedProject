@@ -41,9 +41,18 @@ public class ManagedTaskBean {
     private List<Task> task_list;
     private String userid;
     private boolean taskNoAdded;
+    private String editUser;
 
     public UsersFacade getUsersFacade() {
         return usersFacade;
+    }
+
+    public String getEditUser() {
+        return editUser;
+    }
+
+    public void setEditUser(String editUser) {
+        this.editUser = editUser;
     }
 
     public void setUsersFacade(UsersFacade usersFacade) {
@@ -148,7 +157,7 @@ public class ManagedTaskBean {
         this.taskNoAdded = false;
         Users user = usersFacade.find(this.userid);
 
-        List<Task> tasksadded = taskFacade.findTaskByNameIdproject(loginBean.getProject(),this.name);
+        List<Task> tasksadded = taskFacade.findTaskByNameIdproject(loginBean.getProject(), this.name);
 
         Task addTask = new Task();
         addTask.setName(this.name);
@@ -177,13 +186,14 @@ public class ManagedTaskBean {
         return "project";
     }
 
-    public String doEditTask(Long idTask) {
-        Task task = new Task();
-        task.setIdTask(idTask);
-        System.out.println("Id de la tarea: " + task);
-        task = taskFacade.find(idTask);
-        loginBean.setEditTask(task);
-        taskFacade.edit(loginBean.getEditTask());
+    public String doEditTask(Task task) {
+        Task editTask = task;
+        Users user = usersFacade.find(this.editUser);
+        Collection<Users> collecttion_user = editTask.getUsersCollection();
+        collecttion_user.clear();
+        collecttion_user.add(user);
+        editTask.setUsersCollection(collecttion_user);
+        taskFacade.edit(editTask);
         return "project";
     }
 }
