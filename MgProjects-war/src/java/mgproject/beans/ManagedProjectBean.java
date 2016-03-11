@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import mgproject.ejb.ChatFacade;
 import mgproject.ejb.ProjectFacade;
 import mgproject.ejb.TaskFacade;
@@ -26,7 +26,7 @@ import mgproject.entities.Users;
  * @author inftel22
  */
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ManagedProjectBean {   
     @EJB
     private ChatFacade chatFacade;
@@ -137,6 +137,7 @@ public class ManagedProjectBean {
         
        Users user = usersFacade.find(loginBean.getIdUser());
        list_colaborators =  loginBean.getProject().getUsersCollection();
+       
        if(list_colaborators.isEmpty()){
            error=true;
        }

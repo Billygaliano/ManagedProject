@@ -40,21 +40,50 @@ function printMessageElement(message) {
     messageDiv.setAttribute("class", "item ");
     content.appendChild(messageDiv);
 
-    var userImage = document.createElement("img");
-    userImage.setAttribute("src", message.urlImage);
-    userImage.setAttribute("class", "offline");   
-    userImage.setAttribute("alt", "user image");     
-    messageDiv.appendChild(userImage);
+    if(message.user === document.getElementById("nick_user").value){ 
+        var userImage = document.createElement("img");
+        userImage.setAttribute("src", message.urlImage);
+        userImage.setAttribute("class", "on line");   
+        userImage.setAttribute("alt", "user image");     
+        messageDiv.appendChild(userImage);
+        
+        var messageinfo = document.createElement("p");
+        messageinfo.setAttribute("class", "message");      
+        messageinfo.innerHTML = message.user;
+        messageDiv.appendChild(messageinfo);
 
-    var messageinfo = document.createElement("p");
-    messageinfo.setAttribute("class", "message");      
-    messageinfo.innerHTML = message.user;
-    messageDiv.appendChild(messageinfo);
+        var messageUser = document.createElement("span");
+        messageUser.setAttribute("class", "name");
+        messageUser.innerHTML = message.description;
+        messageinfo.appendChild(messageUser);
+    }else{
+        var parragraphDiv = document.createElement("div");
+        parragraphDiv.setAttribute("style", "width: 89%;display: inline-block;text-align: right;");
+        messageDiv.appendChild(parragraphDiv);
+    
+        var messageinfo = document.createElement("p");
+        messageinfo.setAttribute("class", "message");      
+        messageinfo.innerHTML = message.user;
+        parragraphDiv.appendChild(messageinfo);
 
-    var messageUser = document.createElement("span");
-    messageUser.setAttribute("class", "name");
-    messageUser.innerHTML = message.description;
-    messageinfo.appendChild(messageUser);
+        var messageUser = document.createElement("span");
+        messageUser.setAttribute("style", "display: block;font-weight: 600;");
+        messageUser.setAttribute("class", "name");
+        messageUser.innerHTML = message.description;
+        messageinfo.appendChild(messageUser);        
+        
+        var imgDiv = document.createElement("div");
+        imgDiv.setAttribute("style", "width: 11%;float: right;display: inline-block;");
+        messageDiv.appendChild(imgDiv);
+        
+        var userImage = document.createElement("img");
+        userImage.setAttribute("src", message.urlImage);
+        userImage.setAttribute("style", "width: 40px;height: 40px;border-radius: 50%;border: 2px solid #dd4b39;");  
+        userImage.setAttribute("align", "right")
+        userImage.setAttribute("alt", "user image");     
+        imgDiv.appendChild(userImage);
+    
+    }
 }
 
 function chatSubmit() {
