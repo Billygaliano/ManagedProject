@@ -66,7 +66,7 @@ public class Project implements Serializable {
     @JoinColumn(name = "ID_ADMIN", referencedColumnName = "ID_USER")
     @ManyToOne
     private Users idAdmin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProject")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProject",orphanRemoval = true)
     private Collection<Task> taskCollection;
     @OneToMany(mappedBy = "idProject")
     private Collection<Chat> chatCollection;

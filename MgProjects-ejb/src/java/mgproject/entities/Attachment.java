@@ -35,10 +35,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Attachment.findByNombre", query = "SELECT a FROM Attachment a WHERE a.nombre = :nombre"),
     @NamedQuery(name = "Attachment.findByIdProject", query = "SELECT a FROM Attachment a WHERE a.idProject = :idProject")})
 public class Attachment implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(generator="ATTACHMENT_SEQUENCE") 
-    @SequenceGenerator(name="ATTACHMENT_SEQUENCE",sequenceName="at_seq", allocationSize=1)
+    @GeneratedValue(generator = "ATTACHMENT_SEQUENCE")
+    @SequenceGenerator(name = "ATTACHMENT_SEQUENCE", sequenceName = "at_seq", allocationSize = 1)
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ATTACHMENT")
@@ -116,5 +117,5 @@ public class Attachment implements Serializable {
     public String toString() {
         return "mgproject.entities.Attachment[ idAttachment=" + idAttachment + " ]";
     }
-    
+
 }

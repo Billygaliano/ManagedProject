@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import mgproject.entities.Attachment;
+import mgproject.entities.Project;
 
 /**
  *
@@ -30,7 +31,7 @@ public class AttachmentFacade extends AbstractFacade<Attachment> {
         super(Attachment.class);
     }
 
-    public List<Attachment> findByIdProject(Long idProject) {
+    public List<Attachment> findByIdProject(Project idProject) {
         List<Attachment> attach_list;
         attach_list = em.createNamedQuery("Attachment.findByIdProject").setParameter("idProject", idProject).getResultList();
         return attach_list;

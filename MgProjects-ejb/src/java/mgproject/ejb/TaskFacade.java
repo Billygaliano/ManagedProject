@@ -18,6 +18,7 @@ import mgproject.entities.Task;
  */
 @Stateless
 public class TaskFacade extends AbstractFacade<Task> {
+
     @PersistenceContext(unitName = "MgProjects-ejbPU")
     private EntityManager em;
 
@@ -29,13 +30,14 @@ public class TaskFacade extends AbstractFacade<Task> {
     public TaskFacade() {
         super(Task.class);
     }
-     public List<Task> findTaskByProjectUser(Project project){
+
+    public List<Task> findTaskByProjectUser(Project project) {
         List<Task> lista_task;
         lista_task = em.createNamedQuery("Task.findByProjectUser").setParameter("idproject", project).getResultList();
         return lista_task;
     }
-   
-    public List<Task> findTaskByNameIdproject(Project project, String name){
+
+    public List<Task> findTaskByNameIdproject(Project project, String name) {
         List<Task> task_list = em.createNamedQuery("Task.findByNameAnProject").setParameter("idproject", project).setParameter("name", name).getResultList();
         return task_list;
     }

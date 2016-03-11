@@ -18,6 +18,7 @@ import mgproject.entities.Chat;
  */
 @Stateless
 public class ChatFacade extends AbstractFacade<Chat> {
+
     @PersistenceContext(unitName = "MgProjects-ejbPU")
     private EntityManager em;
 
@@ -29,7 +30,8 @@ public class ChatFacade extends AbstractFacade<Chat> {
     public ChatFacade() {
         super(Chat.class);
     }
-    public List<Chat> findByIdProject(Long idProject){
+
+    public List<Chat> findByIdProject(Long idProject) {
         Query query = em.createQuery("SELECT c FROM Chat c WHERE c.idProject.idProject = :idProject")
                 .setParameter("idProject", idProject);
         List<Chat> list = query.getResultList();
