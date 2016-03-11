@@ -27,7 +27,6 @@ public class MessageSessionHandler {
     
     @PostConstruct
     public void afterCreate() {
-        System.out.println("MessageSessionHandler creado");
     }
     
     public void addSocketSession(String idProject, Session session) {
@@ -70,7 +69,6 @@ public class MessageSessionHandler {
         mc.add(gson.fromJson(message, Message.class));  
         JsonReader reader = Json.createReader(new StringReader(gson.toJson(mc)));
         JsonArray myArray = reader.readArray();        
-        System.out.println("Mensajes: "+ myArray.toString());
         for (SocketSession ss : socketSessions) {
             if(ss.getIdproject().equalsIgnoreCase(idProject)){
                 sendToSession(ss.getSession(), myArray);
@@ -79,7 +77,6 @@ public class MessageSessionHandler {
     }
 
     private void saveChat(String idProject) {
-        System.out.println("Saving Chat: " + idProject);
         for(ProjectChat chat : projectChats){
             if(chat.getProjectId().equalsIgnoreCase(idProject)){
                 chat.saveChat();

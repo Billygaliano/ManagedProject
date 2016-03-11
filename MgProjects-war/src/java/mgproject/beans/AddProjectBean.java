@@ -5,6 +5,7 @@
  */
 package mgproject.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +26,7 @@ import mgproject.entities.Users;
  */
 @ManagedBean
 @RequestScoped
-public class AddProjectBean {
+public class AddProjectBean implements Serializable{
 
     @EJB
     private UsersFacade usersFacade;
@@ -35,8 +36,6 @@ public class AddProjectBean {
 
     @EJB
     private ProjectFacade projectFacade;
-    
-    
     
     private String name;
     private String desc;
@@ -50,7 +49,10 @@ public class AddProjectBean {
     private boolean exito=false;
     private boolean invitacion=false;
     private boolean error2=false;
-   
+
+    public AddProjectBean() {
+    }
+    
     public boolean isExito() {
         return exito;
     }
@@ -67,8 +69,6 @@ public class AddProjectBean {
         this.invitacion = invitacion;
     }
    
-    
-
     public LoginBean getLoginBean() {
         return loginBean;
     }
@@ -76,9 +76,7 @@ public class AddProjectBean {
     public void setLoginBean(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
-
     
-
     public String getIdColaborador() {
         return IdColaborador;
     }
@@ -102,8 +100,6 @@ public class AddProjectBean {
     public void setColaboradores(List<Users> colaboradores) {
         this.colaboradores = colaboradores;
     }
-
-
     
     public String getName() {
         return name;
@@ -152,12 +148,7 @@ public class AddProjectBean {
     public void setError2(boolean error2) {
         this.error2 = error2;
     }
-    
-    
-    
-  
-    public AddProjectBean() {
-    }
+
     
     @PostConstruct
     public void doInit(){
@@ -166,6 +157,9 @@ public class AddProjectBean {
         exito=false;
         error2=false;
         admin = usersFacade.find(loginBean.getIdUser());
+        if(loginBean.getUsers_list() != null && admin != null){
+            loginBean.getUsers_list().remove(this.admin);
+        }
   
     }
     

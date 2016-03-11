@@ -5,6 +5,7 @@
  */
 package mgproject.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ import mgproject.entities.Users;
  */
 @ManagedBean
 @ViewScoped
-public class ManagedTaskBean {
+public class ManagedTaskBean implements Serializable {
 
     @ManagedProperty(value = "#{loginBean}")
     private LoginBean loginBean;

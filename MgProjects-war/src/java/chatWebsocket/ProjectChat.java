@@ -24,10 +24,11 @@ import mgproject.entities.Project;
  * @author inftel22
  */
 public class ProjectChat {
+
     ProjectFacade projectFacade = lookupProjectFacadeBean();
     ChatFacade chatFacade = lookupChatFacadeBean();
-    
-    private Gson gson = new Gson();    
+
+    private Gson gson = new Gson();
     private String projectId;
     private ArrayList<Message> mychat = new ArrayList<>();
 
@@ -36,18 +37,18 @@ public class ProjectChat {
      */
     public ProjectChat() {
     }
-    
-    public ProjectChat(String projectId){
+
+    public ProjectChat(String projectId) {
         this.projectId = projectId;
-        Chat chat = null;  
+        Chat chat = null;
         long idProjectLong = Long.parseLong(projectId);
-        if(chatFacade.findByIdProject(idProjectLong).isEmpty()){
+        if (chatFacade.findByIdProject(idProjectLong).isEmpty()) {
             mychat.add(new Message("System", "Chat creado", "https://upload.wikimedia.org/wikipedia/commons/c/c3/MP_Icon.png"));
             Project project = projectFacade.find(idProjectLong);
             Chat newChat = new Chat();
             newChat.setIdProject(project);
             chatFacade.create(newChat);
-        }else{
+        } else {
             List<Chat> chats = chatFacade.findByIdProject(idProjectLong);
             chat = chats.get(0);
             byte[] oldchat = chat.getMessages();
@@ -86,8 +87,8 @@ public class ProjectChat {
     public void setMychat(ArrayList<Message> mychat) {
         this.mychat = mychat;
     }
-    
-    public void addMessageToChat(String message){
+
+    public void addMessageToChat(String message) {
         Message mc = gson.fromJson(message, Message.class);
         mychat.add(mc);
     }
@@ -113,10 +114,10 @@ public class ProjectChat {
         }
         return true;
     }
-    
-    public void saveChat(){          
+
+    public void saveChat() {
         long idProjectLong = Long.parseLong(projectId);
-        List<Chat> chats = chatFacade.findByIdProject(idProjectLong); 
+        List<Chat> chats = chatFacade.findByIdProject(idProjectLong);
         Chat chat = chats.get(0);
         String toByteArray = gson.toJson(mychat);
         byte[] newchat = toByteArray.getBytes();
@@ -143,5 +144,5 @@ public class ProjectChat {
             throw new RuntimeException(ne);
         }
     }
-    
+
 }

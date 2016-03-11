@@ -11,8 +11,8 @@ import javax.websocket.Session;
  *
  * @author inftel22
  */
-
 public class SocketSession {
+
     private String idproject;
     private Session session;
 
@@ -23,7 +23,6 @@ public class SocketSession {
     public void setIdproject(String idproject) {
         this.idproject = idproject;
     }
-
 
     public Session getSession() {
         return session;

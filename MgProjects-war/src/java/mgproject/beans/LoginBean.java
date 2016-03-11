@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 package mgproject.beans;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.Serializable;
 import javax.faces.bean.SessionScoped;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class LoginBean implements Serializable {
 
     @EJB
     private UsersFacade usersFacade;
-    
+
     private String idUser;
     private String nickName;
     private String urlImage;
@@ -50,6 +50,9 @@ public class LoginBean implements Serializable {
     private Task editTask;
     private List<Project> list_colaborators;
     private List<Users> users_list;
+
+    public LoginBean() {
+    }
 
     public List<Project> getList_colaborators() {
         return list_colaborators;
@@ -81,7 +84,7 @@ public class LoginBean implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
-    }    
+    }
 
     public List<Users> getUsers_list() {
         return users_list;
@@ -90,7 +93,7 @@ public class LoginBean implements Serializable {
     public void setUsers_list(List<Users> users_list) {
         this.users_list = users_list;
     }
-    
+
     public List<Project> getProject_list() {
         return project_list;
     }
@@ -155,9 +158,6 @@ public class LoginBean implements Serializable {
         this.payload = payload;
     }
 
-    public LoginBean() {
-    }
-
     public void init() {
         if (this.idUser == null) {
             this.singIn = false;
@@ -167,19 +167,19 @@ public class LoginBean implements Serializable {
                 Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }
 
-    public String doLogin(){
+    public String doLogin() {
         Users user = usersFacade.find(this.idUser);
-        
-        if( user == null ){
+
+        if (user == null) {
             Users newUser = new Users();
             newUser.setIdUser(this.idUser);
             newUser.setNick(this.nickName);
             newUser.setUrlImage(this.urlImage);
             usersFacade.create(newUser);
-        }else{
+        } else {
             user.setIdUser(this.idUser);
             user.setNick(this.nickName);
             user.setUrlImage(this.urlImage);
@@ -188,17 +188,17 @@ public class LoginBean implements Serializable {
         singIn = true;
         project_list = projectFacade.findByUser(user);
         users_list = usersFacade.findAll();
-        
+
         return "index";
     }
-    
+
     public String doLogout() {
         this.singIn = false;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index";
-    }	
-    
-    public String doRedirectToProject(Project project){
+    }
+
+    public String doRedirectToProject(Project project) {
         this.project = project;
         return "project";
     }

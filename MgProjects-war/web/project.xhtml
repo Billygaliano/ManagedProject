@@ -9,7 +9,7 @@
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Dashboard</title>
+        <title>Proyecto: #{loginBean.project.name}</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta name="google-signin-scope" content="profile email"/>
@@ -282,7 +282,7 @@
                                             </div>
                                             <div class="box-footer clearfix">
                                                 <h:commandButton class="btn btn-default pull-right" action="#{managedTaskBean.doAddTask()}" value="Crear"></h:commandButton>
-                                                
+
                                             </div>
                                         </h:form>
                                     </div>
@@ -329,20 +329,20 @@
                                 <div class="box-header">
                                     <i class="fa fa-files-o"></i>
                                     <h3 class="box-title">Ficheros Compartidos</h3>
-                                    </div>
+                                </div>
                                 <div class="box-body">
-                                    <ui:repeat value="#{fileUploadBean.attach_list}" var="files">
+                                    <ui:repeat value="#{uploadFileBean.attach_list}" var="files">
                                         <h:form>
                                             <li style="list-style:none">
-                                            <h:commandLink action="#{fileUploadBean.diRedirect(files.blob)}" class="fa fa-file"> <h:outputText value=" #{files.nombre}"></h:outputText></h:commandLink>
+                                                <h:commandLink action="#{uploadFileBean.doRedirect(files.blob)}" class="fa fa-file"> <h:outputText value=" #{files.nombre}"></h:outputText></h:commandLink>
 
-                                        </li>
-                                    </h:form>
+                                            </li>
+                                        </h:form>
                                     </ui:repeat>
                                     <br/>
                                     <h:form enctype="multipart/form-data">
-                                        <h:inputFile value="#{fileUploadBean.file}"></h:inputFile>
-                                        <h:commandButton class="btn btn-default pull-right" action="#{fileUploadBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
+                                        <h:inputFile value="#{uploadFileBean.file}"></h:inputFile>
+                                        <h:commandButton class="btn btn-default pull-right" action="#{uploadFileBean.doUpLoadFile()}" value="Subir Fichero"></h:commandButton>
                                     </h:form>
                                 </div>
                             </div>
@@ -394,7 +394,7 @@
                                                 </div>
                                             </ui:repeat>
                                             <div class="contacts-list">
-                                                    <h:outputText rendered="#{managedProjectBean.admin != true}" value=" #{managedProjectBean.loginBean.nickName}" class="fa fa-github"/>
+                                                <h:outputText rendered="#{managedProjectBean.admin != true}" value=" #{managedProjectBean.loginBean.nickName}" class="fa fa-github"/>
                                             </div>
                                             <br/>
                                             <h:outputLabel rendered="#{managedProjectBean.admin}">Invitar a:</h:outputLabel>

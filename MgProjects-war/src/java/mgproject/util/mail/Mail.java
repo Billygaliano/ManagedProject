@@ -24,14 +24,15 @@ import mgproject.beans.SendEmailToBean;
  */
 @Stateless
 public class Mail {
+
     @ManagedProperty(value = "#{sendEmailToBean}")
     protected SendEmailToBean sendEmailToBean;
-    
+
     String servidorSMTP = "smtp.gmail.com";
     String puerto = "587";
     String usuario = "palmargom1@gmail.com";
     String password = "estp610073016";
-    
+
     String destiny = null;
     String subject = null;
     String mensaje = null;
@@ -100,11 +101,11 @@ public class Mail {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
     public void sendMail() throws AddressException, MessagingException {
         destiny = "palmargom1@gmail.com";
         Properties props = new Properties();
-        
+
         props.put("mail.debug", "false");
         props.put("mail.smtp.auth", true);
         props.put("mail.smtp.starttls.enable", true);
@@ -112,28 +113,25 @@ public class Mail {
         props.put("mail.smtp.port", puerto);
         props.setProperty("mail.user", usuario);
         props.setProperty("mail.password", password);
-        
+
         Session session = Session.getInstance(props, null);
-        
-        
-        
+
         MimeMessage message = new MimeMessage(session);
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(destiny));
         message.setSubject(subject);
         message.setSentDate(new Date());
         message.setContent(mensaje, "text/html");
-        
+
         Transport tr = session.getTransport("smtp");
         tr.connect(servidorSMTP, usuario, password);
         message.saveChanges();
         tr.sendMessage(message, message.getAllRecipients());
         tr.close();
     }
-   
-    
-     public void sendMailTo() throws AddressException, MessagingException {
+
+    public void sendMailTo() throws AddressException, MessagingException {
         Properties props = new Properties();
-        
+
         props.put("mail.debug", "false");
         props.put("mail.smtp.auth", true);
         props.put("mail.smtp.starttls.enable", true);
@@ -141,24 +139,20 @@ public class Mail {
         props.put("mail.smtp.port", puerto);
         props.setProperty("mail.user", usuario);
         props.setProperty("mail.password", password);
-        
+
         Session session = Session.getInstance(props, null);
-        
-        
-        
+
         MimeMessage message = new MimeMessage(session);
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(destiny));
         message.setSubject(subject);
         message.setSentDate(new Date());
         message.setContent(mensaje, "text/html");
-        
+
         Transport tr = session.getTransport("smtp");
         tr.connect(servidorSMTP, usuario, password);
         message.saveChanges();
         tr.sendMessage(message, message.getAllRecipients());
         tr.close();
     }
-    
+
 }
-
-

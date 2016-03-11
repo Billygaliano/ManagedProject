@@ -7,7 +7,7 @@
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <title>Dashboard</title>
+        <title>Nuevo Proyecto</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
         <meta name="google-signin-scope" content="profile email"/>
@@ -77,19 +77,11 @@
             <section class="content-header">
                 <h1>
                     Nuevo Proyecto
-
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                    <li class="active">Here</li>
-                </ol>
-
                 <div class="panel-body">
-
                     <!-- AddTest FORM -->
                     <h:form>
                         <div class="form-group ">
-
                             <h:outputText value="Ya existe un proyecto con ese nombre" rendered="#{addProjectBean.error}" class="alert alert-danger center-block small-margin"/>
                             <h:outputText value="Usuario invitado correctamente" rendered="#{addProjectBean.invitacion}" class="alert alert-success center-block small-margin"/>
                             <h:outputText value="Proyecto creado correctamente" rendered="#{addProjectBean.exito}" class="alert alert-success center-block small-margin"/>
@@ -104,10 +96,6 @@
                             <label>Descripcion:</label>
                             <h:inputTextarea id="descripcion" class="form-control" rows="5"  value="#{addProjectBean.desc}"></h:inputTextarea>
                         </div>
-
-
-
-
                         <div class="form-group">
                             <label>Administrador:</label>
                             <h:inputText id="autor" class="form-control"  value="#{addProjectBean.loginBean.nickName}" readonly="true">
@@ -117,7 +105,6 @@
                         <h:commandButton  class="btn btn-primary btn-md" action="#{addProjectBean.doAddProject()}" value="Añadir Proyecto"/>
                     </h:form>
                     <br/>
-
                 </div>
             </section>
 
@@ -153,7 +140,5 @@
         <script src="themes/bootstrap/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="themes/dist/js/app.min.js"></script>
-
-
     </h:body>
 </html>

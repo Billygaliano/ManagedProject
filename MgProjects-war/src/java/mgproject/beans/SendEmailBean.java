@@ -5,7 +5,7 @@
  */
 package mgproject.beans;
 
-
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -18,7 +18,7 @@ import mgproject.util.mail.Mail;
  */
 @ManagedBean
 @RequestScoped
-public class SendEmailBean {
+public class SendEmailBean implements Serializable {
 
     @EJB
     private Mail mail;
@@ -68,8 +68,6 @@ public class SendEmailBean {
     public void setTemplate(String template) {
         this.template = template;
     }
-    
-    
 
     /**
      * Creates a new instance of sendEmailBean
@@ -78,8 +76,8 @@ public class SendEmailBean {
     }
 
     public void doSendMail() throws MessagingException {
-        
-                template = "<div style='background-color:#ececec;padding:0;margin:0;font-weight:200;width:100%!important'><span class='im'><div style='overflow:hidden;color:transparent;width:0;font-size:0;min-height:0'> El usuario con nombre" + name +":&nbsp; ha enviado el siguiente mensaje: </div> </span><table align='center' border='0' cellspacing='0' cellpadding='0' style='table-layout:fixed;font-weight:200;font-family:Helvetica,Arial,sans-serif' width='100%'><tbody> <td align='center'><center style='width:100%'>"
+
+        template = "<div style='background-color:#ececec;padding:0;margin:0;font-weight:200;width:100%!important'><span class='im'><div style='overflow:hidden;color:transparent;width:0;font-size:0;min-height:0'> El usuario con nombre" + name + ":&nbsp; ha enviado el siguiente mensaje: </div> </span><table align='center' border='0' cellspacing='0' cellpadding='0' style='table-layout:fixed;font-weight:200;font-family:Helvetica,Arial,sans-serif' width='100%'><tbody> <td align='center'><center style='width:100%'>"
                 + "<table bgcolor='#FFFFFF' border='0' cellspacing='0' cellpadding='0' style='margin:0 auto;max-width:512px;font-weight:200;width:inherit;font-family:Helvetica,Arial,sans-serif' width='512'> "
                 + "<tbody> <td bgcolor='#F3F3F3' width='100%' style='background-color:#f3f3f3;padding:12px;border-bottom:1px solid #ececec'>"
                 + "<table border='0' cellspacing='0' cellpadding='0' style='font-weight:200;width:100%!important;font-family:Helvetica,Arial,sans-serif;min-width:100%!important' width='100%'>"
@@ -88,13 +86,13 @@ public class SendEmailBean {
                 + "<table border  = '0' cellspacing  = '0' cellpadding  = '0' style = 'font-weight:200;font-family:Helvetica,Arial,sans-serif' width = '100%'> "
                 + "<tbody>  <td width  = '100%'> <table border  = '0' cellspacing  = '0' cellpadding  = '0' style  = 'font-weight:200;font-family:Helvetica,Arial,sans-serif' width = '100%'> "
                 + "<tbody>  <td width  = '100%' style  = 'padding:24px;color:#434649' > <table bgcolor  = '#FFFFFF' border  = '0' cellspacing  = '0' cellpadding  = '0' style  = 'font-weight:200;font-family:Helvetica,Arial,sans-serif' width  = '100%'> <tbody>  "
-                + "<h1 style = 'padding:0;margin:0;font-weight:normal;padding-bottom:4px;font-size:20px;font-family:Helvetica Neue,Helvetica,Arial;line-height:24px' > El usuario con nombre  <strong>" + name +"</strong> ha enviado el siguiente mensaje: <strong>" + message+"</strong></h1><h2 style = 'padding:0;margin:0;font-weight:normal;font-size:20px;font-family:Helvetica Neue,Helvetica,Arial;line-height:24px'> </h2> </td> </tr> <tr><td style='padding:0 0 20px 0'> <table border  = '0' cellspacing  = '0' cellpadding  = '0' style = 'font-weight:200;font-family:Helvetica,Arial,sans-serif' width = '100%'> <tbody><tr>"
-                        + "</tbody></table></td></tr></tbody></table></td> </tr> </tbody> </table></td></tr> </tbody> </table></td> </tr> <td align='left'> "
+                + "<h1 style = 'padding:0;margin:0;font-weight:normal;padding-bottom:4px;font-size:20px;font-family:Helvetica Neue,Helvetica,Arial;line-height:24px' > El usuario con nombre  <strong>" + name + "</strong> ha enviado el siguiente mensaje: <strong>" + message + "</strong></h1><h2 style = 'padding:0;margin:0;font-weight:normal;font-size:20px;font-family:Helvetica Neue,Helvetica,Arial;line-height:24px'> </h2> </td> </tr> <tr><td style='padding:0 0 20px 0'> <table border  = '0' cellspacing  = '0' cellpadding  = '0' style = 'font-weight:200;font-family:Helvetica,Arial,sans-serif' width = '100%'> <tbody><tr>"
+                + "</tbody></table></td></tr></tbody></table></td> </tr> </tbody> </table></td></tr> </tbody> </table></td> </tr> <td align='left'> "
                 + "<table bgcolor='#ECECEC' border='0' cellspacing='0' cellpadding='0' style='padding:0 24px;color:#999999;font-weight:200;font-family:Helvetica,Arial,sans-serif' width='100%'>  </table></td> </tbody> </table> </center></td> </tr> </tbody> </table> </div>";
-        
+
         mail = new Mail(mail.getDestiny(), subject, template);
         mail.sendMail();
-        
+
         exito = true;
         name = "";
         message = "";

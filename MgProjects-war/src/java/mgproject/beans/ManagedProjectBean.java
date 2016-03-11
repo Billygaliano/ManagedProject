@@ -5,6 +5,7 @@
  */
 package mgproject.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -27,7 +28,8 @@ import mgproject.entities.Users;
  */
 @ManagedBean
 @ViewScoped
-public class ManagedProjectBean {   
+public class ManagedProjectBean implements Serializable {
+
     @EJB
     private ChatFacade chatFacade;
     @EJB
@@ -35,20 +37,20 @@ public class ManagedProjectBean {
     @EJB
     private TaskFacade taskFacade;
     @EJB
-    private UsersFacade usersFacade;    
-    
-    @ManagedProperty(value="#{loginBean}")
+    private UsersFacade usersFacade;
+
+    @ManagedProperty(value = "#{loginBean}")
     private LoginBean loginBean;
-    
-    private Collection<Users> list_colaborators;    
-    
+
+    private Collection<Users> list_colaborators;
+
     private int taskAcu;
     private int taskRep;
     private int taskPln;
     private int taskAcc;
     private boolean error;
     private boolean admin;
-    
+
     /**
      * Creates a new instance of ManagedProjectBean
      */
@@ -125,56 +127,56 @@ public class ManagedProjectBean {
 
     public void setTaskAcc(int taskAcc) {
         this.taskAcc = taskAcc;
-    }   
+    }
 
     @PostConstruct
-    public void init() {  
-        
-        admin=false;
-        if(loginBean.getIdUser().equals(loginBean.getProject().getIdAdmin().getIdUser())){
+    public void init() {
+
+        admin = false;
+        if (loginBean.getIdUser().equals(loginBean.getProject().getIdAdmin().getIdUser())) {
             admin = true;
         }
-        
-       Users user = usersFacade.find(loginBean.getIdUser());
-       list_colaborators =  loginBean.getProject().getUsersCollection();
-       
-       if(list_colaborators.isEmpty()){
-           error=true;
-       }
-        
+
+        Users user = usersFacade.find(loginBean.getIdUser());
+        list_colaborators = loginBean.getProject().getUsersCollection();
+
+        if (list_colaborators.isEmpty()) {
+            error = true;
+        }
+
         List<Task> list_task = taskFacade.findTaskByProjectUser(this.loginBean.getProject());
-        
+
         for (Task task : list_task) {
-            if(task.getPriority().equals("acuciante")){
+            if (task.getPriority().equals("acuciante")) {
                 taskAcu++;
             }
-            if(task.getPriority().equals("repentino")){
+            if (task.getPriority().equals("repentino")) {
                 taskRep++;
             }
-            if(task.getPriority().equals("plani")){
+            if (task.getPriority().equals("plani")) {
                 taskPln++;
             }
-            if(task.getPriority().equals("accesorio")){
+            if (task.getPriority().equals("accesorio")) {
                 taskAcc++;
             }
         }
     }
-    
-    public String doDeleteProject(Project project){
+
+    public String doDeleteProject(Project project) {
         Collection<Task> tasks = project.getTaskCollection();
         Collection<Chat> chats = project.getChatCollection();
-        
+
         for (Chat chat : chats) {
             chatFacade.remove(chat);
         }
-        
+
         for (Task task : tasks) {
             taskFacade.remove(task);
-        } 
-        
+        }
+
         projectFacade.remove(project);
         loginBean.setProject_list(projectFacade.findByUser(usersFacade.find(loginBean.getIdUser())));
-        
+
         return ("profile");
     }
 }

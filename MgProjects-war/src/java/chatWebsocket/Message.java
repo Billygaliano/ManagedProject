@@ -14,8 +14,8 @@ public class Message {
 
     public Message() {
     }
-    
-    public Message(String user, String message, String urlImage){
+
+    public Message(String user, String message, String urlImage) {
         this.user = user;
         this.description = message;
         this.urlImage = urlImage;
@@ -36,11 +36,11 @@ public class Message {
     public void setUser(String user) {
         this.user = user;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -48,7 +48,7 @@ public class Message {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }

@@ -7,7 +7,7 @@
     <h:head>
         <meta charset="UTF-8"></meta>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
+        <title>Inicio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
         <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -207,7 +207,7 @@
                             <li><a href="#" data-nav-section="contact"><span>Contacta con nosotros</span></a></li>
                             <li>
                                 <h:form rendered="#{!loginBean.singIn}">
-                                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+                                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
                                 </h:form>
                                 <h:form rendered="#{loginBean.singIn}">
                                     <h:commandLink action="profile.xhtml" rendered="#{loginBean.singIn}"><span style="margin-top: 14px;">Perfil</span></h:commandLink>
@@ -388,23 +388,23 @@
 
                     <div class="col-md-6 to-animate">
                         <h:form>
-                        <h3>Formulario de Contacto</h3>
-                        <div class="form-group ">
-                            <h:outputLabel for="name" class="sr-only">Nombre</h:outputLabel>
-                            <h:inputTextarea id="name" value="#{sendEmailBean.name}" class="form-control" p:placeholder="Nombre"></h:inputTextarea>
-                        </div>
-                        <div class="form-group ">
-                            <h:outputLabel for="subject" class="sr-only">Asunto</h:outputLabel>
-                            <h:inputTextarea id="subject" value="#{sendEmailBean.subject}" class="form-control" p:placeholder="Asunto"></h:inputTextarea>
-                        </div>
-                        <div class="form-group ">
-                            <label for="message" class="sr-only">Mensaje</label>
-                            <h:inputTextarea id="message" value="#{sendEmailBean.message}" cols="30" rows="5" class="form-control" p:placeholder="Escriba pregunta"></h:inputTextarea>
-                        </div>
-                        <div class="form-group ">
-                            <h:commandButton class="btn btn-primary btn-lg" value="Enviar Mensaje" action="#{sendEmailBean.doSendMail}" />
-                        </div>
-                        <h:outputText value="Email enviado correctamente" rendered="#{sendEmailBean.exito}" class="alert alert-success center-block small-margin"/>
+                            <h3>Formulario de Contacto</h3>
+                            <div class="form-group ">
+                                <h:outputLabel for="name" class="sr-only">Nombre</h:outputLabel>
+                                <h:inputTextarea id="name" value="#{sendEmailBean.name}" class="form-control" p:placeholder="Nombre"></h:inputTextarea>
+                            </div>
+                            <div class="form-group ">
+                                <h:outputLabel for="subject" class="sr-only">Asunto</h:outputLabel>
+                                <h:inputTextarea id="subject" value="#{sendEmailBean.subject}" class="form-control" p:placeholder="Asunto"></h:inputTextarea>
+                            </div>
+                            <div class="form-group ">
+                                <label for="message" class="sr-only">Mensaje</label>
+                                <h:inputTextarea id="message" value="#{sendEmailBean.message}" cols="30" rows="5" class="form-control" p:placeholder="Escriba pregunta"></h:inputTextarea>
+                            </div>
+                            <div class="form-group ">
+                                <h:commandButton class="btn btn-primary btn-lg" value="Enviar Mensaje" action="#{sendEmailBean.doSendMail}" />
+                            </div>
+                            <h:outputText value="Email enviado correctamente" rendered="#{sendEmailBean.exito}" class="alert alert-success center-block small-margin"/>
                         </h:form>
                     </div>
                 </div>

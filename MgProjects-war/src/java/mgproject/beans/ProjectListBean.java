@@ -5,6 +5,7 @@
  */
 package mgproject.beans;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,15 +24,13 @@ import mgproject.entities.Users;
  */
 @ManagedBean
 @RequestScoped
-public class ProjectListBean {
+public class ProjectListBean implements Serializable{
 
     @ManagedProperty(value="#{loginBean}")
     private LoginBean loginBean;
     
     @EJB
     private UsersFacade usersFacade;
-
-    
     
     @EJB
     private ProjectFacade projectFacade;
