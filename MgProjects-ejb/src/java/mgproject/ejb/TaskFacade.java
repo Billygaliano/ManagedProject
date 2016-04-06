@@ -30,12 +30,13 @@ public class TaskFacade extends AbstractFacade<Task> {
     public TaskFacade() {
         super(Task.class);
     }
-
+    //Devuelve las tareas dado un proyecto
     public List<Task> findTaskByProjectUser(Project project) {
         List<Task> lista_task;
         lista_task = em.createNamedQuery("Task.findByProjectUser").setParameter("idproject", project).getResultList();
         return lista_task;
     }
+    //Devuelven tareas
 
     public List<Task> findTaskByNameIdproject(Project project, String name) {
         List<Task> task_list = em.createNamedQuery("Task.findByNameAnProject").setParameter("idproject", project).setParameter("name", name).getResultList();

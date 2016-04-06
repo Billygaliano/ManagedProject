@@ -30,7 +30,7 @@ public class ChatFacade extends AbstractFacade<Chat> {
     public ChatFacade() {
         super(Chat.class);
     }
-
+    //Devuelve los chat dado un idProject
     public List<Chat> findByIdProject(Long idProject) {
         Query query = em.createQuery("SELECT c FROM Chat c WHERE c.idProject.idProject = :idProject")
                 .setParameter("idProject", idProject);

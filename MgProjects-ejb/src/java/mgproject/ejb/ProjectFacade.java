@@ -30,6 +30,8 @@ public class ProjectFacade extends AbstractFacade<Project> {
     public ProjectFacade() {
         super(Project.class);
     }
+    
+    //
      public List<Project> findByNameAndUser(String name, Users u){
        
         Query query = em.createQuery("SELECT p FROM Project p WHERE p.name = :name AND p.idAdmin = :u")
@@ -38,7 +40,7 @@ public class ProjectFacade extends AbstractFacade<Project> {
         List<Project> list = query.getResultList();
         return list;
     }
-   
+   //Devuelve los proyectos de los que es administrador
     public List<Project> findByUser(Users u){
        
         Query query = em.createQuery("SELECT p FROM Project p WHERE p.idAdmin = :u")
@@ -46,7 +48,7 @@ public class ProjectFacade extends AbstractFacade<Project> {
         List<Project> list = query.getResultList();
         return list;
     }
-   
+   //Devuelve los proyectos donde es colaborador
     public List<Project> findColaborations(Users u){
         Query query = em.createQuery("SELECT p FROM Project p WHERE :u MEMBER OF p.usersCollection")
                 .setParameter("u", u);
