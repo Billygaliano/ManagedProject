@@ -46,7 +46,6 @@ public class MgResful {
     @EJB
     private ProjectFacade projectFacade;
 
-    
     //////////////////////////////////////////////////////////////////////////// PROJECT
     ////////////////////////////////////////////////////////////////////////////
     //Devuelve los proyectos donde el usuario es el administrador
@@ -95,7 +94,7 @@ public class MgResful {
 
     @DELETE
     @Path("project/{id}")
-    public void removeProject(@PathParam("id")Long id) {
+    public void removeProject(@PathParam("id") Long id) {
         Project p = projectFacade.find(id);
         if (p != null) {
             projectFacade.remove(p);
@@ -104,14 +103,15 @@ public class MgResful {
 
     @GET
     @Path("projectCollaborations/{id}")
-    public List<Project> findCollaborators(@PathParam("id")String id){
+    public List<Project> findCollaborators(@PathParam("id") String id) {
         Users u = usersFacade.find(id);
-        if(u != null)
+        if (u != null) {
             return projectFacade.findColaborations(u);
-        else{
+        } else {
             return null;
         }
     }
+
     //////////////////////////////////////////////////////////////////////////// USER
     ////////////////////////////////////////////////////////////////////////////
     //Funcion login, necesita un Usuario en JSON
@@ -120,11 +120,13 @@ public class MgResful {
     @Path("user")
     @Consumes({MediaType.APPLICATION_JSON})
     public void createUser(Users u) {
-        Users addUser = usersFacade.find(u);
-        if (addUser == null) {
-            usersFacade.create(u);
-        } else {
+        Users addUser = usersFacade.find(u.getIdUser());
+        if (addUser != null) {
             usersFacade.edit(u);
+            System.out.println("Edita usuario");
+        } else {
+            usersFacade.create(u);
+            System.out.println("Crea usuario");
         }
     }
 
@@ -139,12 +141,11 @@ public class MgResful {
 
     //////////////////////////////////////////////////////////////////////////// TASK
     ////////////////////////////////////////////////////////////////////////////
-    
     //Devuelve las tareas dado un projecto
     @GET
     @Path("task/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Task> findTaskByProjectUser(@PathParam("id")Long id) {
+    public List<Task> findTaskByProjectUser(@PathParam("id") Long id) {
         Project p = projectFacade.find(id);
         if (p != null) {
             return taskFacade.findTaskByProjectUser(p);
@@ -152,66 +153,64 @@ public class MgResful {
             return null;
         }
     }
-    
+
     //DELETE TASK
     @DELETE
     @Path("task/{id}")
-    public void removeTask(@PathParam("id")Long id){
+    public void removeTask(@PathParam("id") Long id) {
         Task t = taskFacade.find(id);
-        if(t != null)
+        if (t != null) {
             taskFacade.remove(t);
+        }
     }
-    
+
     //Devuelve lista de proyecto dado un id de projecto y nombre de tarea
     @GET
     @Path("task/{id}/{name}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Task> findTaskByNameAndIdProject(@PathParam("id")Long id,@PathParam("name")String name){
+    public List<Task> findTaskByNameAndIdProject(@PathParam("id") Long id, @PathParam("name") String name) {
         Project p = projectFacade.find(id);
-        if(p != null){
+        if (p != null) {
             return taskFacade.findTaskByNameIdproject(p, name);
-        }
-        else{
+        } else {
             return null;
         }
     }
-    
+
     //CREAT TASK
     @POST
     @Path("task")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void createTask(Task entity){
+    public void createTask(Task entity) {
         taskFacade.create(entity);
     }
-    
+
     //EDITAR TASK
-    @PUT 
+    @PUT
     @Path("task")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void editTask(Task entity){
+    public void editTask(Task entity) {
         taskFacade.edit(entity);
     }
-    
 
     //////////////////////////////////////////////////////////////////////////// ATTATCHMENT
     ////////////////////////////////////////////////////////////////////////////
-    
     @GET
     @Path("attatch/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Attachment> findAttatchByIdProject(@PathParam("id")Long id){
+    public List<Attachment> findAttatchByIdProject(@PathParam("id") Long id) {
         Project p = projectFacade.find(id);
-        if(p != null){
+        if (p != null) {
             return attachmentFacade.findByIdProject(p);
-        }else{
+        } else {
             return null;
         }
     }
-    
+
     @POST
     @Path("attatch")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createAttatch(Attachment entity){
+    public void createAttatch(Attachment entity) {
         attachmentFacade.create(entity);
     }
 }
