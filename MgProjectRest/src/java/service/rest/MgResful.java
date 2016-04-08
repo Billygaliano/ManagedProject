@@ -5,6 +5,7 @@
  */
 package service.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -111,7 +112,19 @@ public class MgResful {
             return null;
         }
     }
-
+    
+    @GET
+    @Path("myproject/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Project> findProjectById(@PathParam("id")String id){
+        List<Project> projectList;
+        Users u = usersFacade.find(id);
+        projectList = projectFacade.findByUser(u);
+        projectList.addAll(projectFacade.findColaborations(u));
+        
+        return projectList;
+    }
+    
     //////////////////////////////////////////////////////////////////////////// USER
     ////////////////////////////////////////////////////////////////////////////
     //Funcion login, necesita un Usuario en JSON
@@ -123,10 +136,8 @@ public class MgResful {
         Users addUser = usersFacade.find(u.getIdUser());
         if (addUser != null) {
             usersFacade.edit(u);
-            System.out.println("Edita usuario");
         } else {
             usersFacade.create(u);
-            System.out.println("Crea usuario");
         }
     }
 
