@@ -6,6 +6,7 @@
 package service.rest;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -111,6 +112,14 @@ public class MgResful {
         } else {
             return null;
         }
+    }
+    
+    @GET
+    @Path("collaboratorsProject/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Collection<Users> findListCollaboratosByIdProject(@PathParam("id")Long id){
+        Project p = projectFacade.find(id);
+        return p.getUsersCollection();
     }
     
     @GET
