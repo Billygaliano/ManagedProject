@@ -105,6 +105,7 @@ public class MgResful {
 
     @GET
     @Path("projectCollaborations/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Project> findCollaborators(@PathParam("id") String id) {
         Users u = usersFacade.find(id);
         if (u != null) {
