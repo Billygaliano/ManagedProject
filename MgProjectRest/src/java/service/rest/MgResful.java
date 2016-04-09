@@ -120,6 +120,7 @@ public class MgResful {
     public Collection<Users> findListCollaboratosByIdProject(@PathParam("id")Long id){
         Project p = projectFacade.find(id);
         return p.getUsersCollection();
+        
     }
     
     @GET
