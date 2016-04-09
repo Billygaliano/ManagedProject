@@ -113,7 +113,7 @@ public class MgResful {
             return null;
         }
     }
-    
+    //Devuelve una colleccion de Usuarios que estan en colaboracion con el proyecto
     @GET
     @Path("collaboratorsProject/{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -151,13 +151,18 @@ public class MgResful {
         }
     }
 
-    //Devuelve todos los usuarios del sistema
+    //Devuelve todos los usuarios del sistema que no estan en colaboracion con este proyecto
     //Para mostrar en la lista de añadir colaborador
     @GET
-    @Path("user")
+    @Path("user/{idUser}/{idProject}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Users> findAll() {
-        return usersFacade.findAll();
+    public List<Users> findAll(@PathParam("idUser")String idUser ,@PathParam("idProject")Long idProject) {
+        Users u = usersFacade.find(idUser);
+        List<Users> usersList;
+        usersList = usersFacade.findAll();
+        usersList.removeAll(findListCollaboratosByIdProject(idProject));
+        usersList.remove(u);
+        return usersList;
     }
 
     //////////////////////////////////////////////////////////////////////////// TASK
