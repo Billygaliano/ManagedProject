@@ -172,10 +172,10 @@ public class MgResful {
     @GET
     @Path("task/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Task> findTaskByProjectUser(@PathParam("id") Long id) {
+    public Collection<Task> findTaskByProjectUser(@PathParam("id") Long id) {
         Project p = projectFacade.find(id);
         if (p != null) {
-            return taskFacade.findTaskByProjectUser(p);
+            return p.getTaskCollection();
         } else {
             return null;
         }
