@@ -7,7 +7,9 @@ package service.rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -87,10 +89,12 @@ public class MgResful {
 
     //Editar projecto
     @PUT
-    @Path("project")
+    @Path("project/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void addCollaborator(Project entity) {
-        projectFacade.edit(entity);
+    public void addCollaborator(Users entity,@PathParam("id")Long id) {
+        Project p = projectFacade.find(id);
+        p.getUsersCollection().add(entity);
+        projectFacade.edit(p);
 
     }
 
@@ -127,13 +131,13 @@ public class MgResful {
     @GET
     @Path("myproject/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Project> findProjectById(@PathParam("id")String id){
+    public HashSet<Project> findProjectById(@PathParam("id")String id){
         List<Project> projectList;
         Users u = usersFacade.find(id);
         projectList = projectFacade.findByUser(u);
         projectList.addAll(projectFacade.findColaborations(u));
         
-        return projectList;
+        return new HashSet<Project>(projectList);
     }
     
     //////////////////////////////////////////////////////////////////////////// USER
@@ -241,3 +245,6 @@ public class MgResful {
         attachmentFacade.create(entity);
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////// CHAT
